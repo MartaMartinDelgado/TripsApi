@@ -11,6 +11,13 @@ namespace TripsApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+
+    /* If the [HttpGet] attribute has a route template (for example, [HttpGet("products")]), append that to the path. 
+     * This sample doesn't use a template. 
+     * For more information, see Attribute routing with Http[Verb] attributes.
+     * https://docs.microsoft.com/en-us/aspnet/core/mvc/controllers/routing?view=aspnetcore-5.0#verb
+     */
+
     public class TripsController : ControllerBase
     {
         private readonly TripsContext _context;
@@ -80,7 +87,8 @@ namespace TripsApi.Controllers
             _context.Trips.Add(trip);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetTrip", new { id = trip.TripId }, trip);
+            //return CreatedAtAction("GetTrip", new { id = trip.TripId }, trip);
+            return CreatedAtAction(nameof(GetTrip), new { id = trip.TripId }, trip);
         }
 
         // DELETE: api/Trips/5

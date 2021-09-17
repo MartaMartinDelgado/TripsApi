@@ -11,5 +11,15 @@ namespace TripsApi.Models
         public string Name { get; set; }
         public string Activity { get; set; }
         public DateTime TripDate { get; set; }
+        public float SpotsAvailable { get; set; }
+    }
+
+    public class TripDTO
+    {
+        public long TripId { get; set; }
+        public string Name { get; set; }
+        public string Activity { get; set; }
+        public DateTime TripDate { get; set; }
+        public float SpotsAvailable { get; set; }
     }
 }
