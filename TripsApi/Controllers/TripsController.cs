@@ -9,6 +9,7 @@ using TripsApi.Models;
 
 namespace TripsApi.Controllers
 {
+    //[Route("api/[Trips]")]
     [Route("api/[controller]")]
     [ApiController]
 
