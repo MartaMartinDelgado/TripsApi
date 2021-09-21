@@ -9,8 +9,7 @@ using TripsApi.Models;
 
 namespace TripsApi.Controllers
 {
-    //[Route("api/[Trips]")]
-    [Route("api/[controller]")]
+    [Route("api/Trips")]
     [ApiController]
 
     /* If the [HttpGet] attribute has a route template (for example, [HttpGet("products")]), append that to the path. 
@@ -54,7 +53,7 @@ namespace TripsApi.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutTrip(long id, Trip trip)
         {
-            if (id != trip.TripId)
+            if (id != trip.Id)
             {
                 return BadRequest();
             }
@@ -89,7 +88,7 @@ namespace TripsApi.Controllers
             await _context.SaveChangesAsync();
 
             //return CreatedAtAction("GetTrip", new { id = trip.TripId }, trip);
-            return CreatedAtAction(nameof(GetTrip), new { id = trip.TripId }, trip);
+            return CreatedAtAction(nameof(GetTrip), new { id = trip.Id }, trip);
         }
 
         // DELETE: api/Trips/5
@@ -110,7 +109,7 @@ namespace TripsApi.Controllers
 
         private bool TripExists(long id)
         {
-            return _context.Trips.Any(e => e.TripId == id);
+            return _context.Trips.Any(e => e.Id == id);
         }
     }
 }
