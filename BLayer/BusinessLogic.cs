@@ -1,7 +1,7 @@
-﻿using Model;
+﻿using Models;
 using System;
 
-namespace BusinessLayer
+namespace BLayer
 {
     public class BusinessLogic
     {
