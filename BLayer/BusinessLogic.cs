@@ -1,16 +1,20 @@
-﻿using Models;
+﻿using DLayer;
+using Models;
 using System;
 
 namespace BLayer
 {
     public class BusinessLogic
     {
-        static Trip currentTrip;
-
-        public static void createTrip(long id, string name, string activity, DateTime tripDate, int spotsAvailable)
+        
+        public static void createTrip(Trip trip)
         {
-            currentTrip = new Trip(id, name, activity, tripDate, spotsAvailable);
-            //DBAccess.
+            if (string.IsNullOrEmpty(trip.Name))
+            {
+                throw new Exception("Name is empty");
+            }
+
+            DBAccess.saveTrip(trip);
         }
     }
 }
