@@ -7,13 +7,13 @@ namespace Models
 {
     public class Trip
     {
-        public long Id { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
         public string Activity { get; set; }
         public DateTime TripDate { get; set; }
         public int SpotsAvailable { get; set; }
 
-        public Trip(long id, string name, string activity, DateTime tripDate, int spotsAvailable)
+        public Trip(int id, string name, string activity, DateTime tripDate, int spotsAvailable)
         {
             this.Id = id;
             this.Name = name;
@@ -28,7 +28,7 @@ namespace Models
 
     //public class TripDTO
     //{
-    //    public long TripId { get; set; }
+    //    public int TripId { get; set; }
     //    public string Name { get; set; }
     //    public string Activity { get; set; }
     //    public DateTime TripDate { get; set; }

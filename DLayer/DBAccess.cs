@@ -20,15 +20,15 @@ namespace DLayer
         static string cs = ConfigurationManager.ConnectionStrings["tripsConnector"].ConnectionString;
         static SqlConnection conn = new SqlConnection(cs);
 
-        public static string saveTrip(Trip t)
+        public static int saveTrip(Trip t)
         {
-            long id = t.Id;
+            int id = t.Id;
             string name = t.Name;
             string activity = t.Activity;
             DateTime tripDate = t.TripDate;
             int spotsAvailable = t.SpotsAvailable;
             SqlCommand cmd = new SqlCommand("INSERT INTO Trip" +
-                "tripId,TripName,Activity,TripDate,SpotsAvailable) VALUES(" +
+                "TripId,TripName,Activity,TripDate,SpotsAvailable) VALUES(" +
                 "@id,@name,@activity,@date,@spots);", conn);
             cmd.Parameters.AddWithValue("@id", id);
             cmd.Parameters.AddWithValue("@name", name);
@@ -38,10 +38,17 @@ namespace DLayer
             try
             {
                 conn.Open();
-                cmd.ExecuteNonQuery
+                cmd.ExecuteNonQuery();
+                SqlCommand c2 = new SqlCommand("SELECT IDENT_CURRENT('Trip')", conn);
+                object o1 = c2.ExecuteScalar();
+                id = int.Parse(o1.ToString());
+            }
+            finally
+            {
+                conn.Close();
             }
 
-            return "Saved";
+            return id;
         }
     }
 }
