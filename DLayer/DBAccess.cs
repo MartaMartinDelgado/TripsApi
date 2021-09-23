@@ -22,15 +22,14 @@ namespace DLayer
 
         public static string saveTrip(Trip t)
         {
-            int id = t.Id;
+            int id = 0;
             string name = t.Name;
             string activity = t.Activity;
             DateTime tripDate = t.TripDate;
             int spotsAvailable = t.SpotsAvailable;
             SqlCommand cmd = new SqlCommand("INSERT INTO Trip" +
-                "TripId,TripName,Activity,TripDate,SpotsAvailable) VALUES(" +
-                "@id,@name,@activity,@date,@spots);", conn);
-            cmd.Parameters.AddWithValue("@id", id);
+                "TripName,Activity,TripDate,SpotsAvailable) VALUES(" +
+                "@name,@activity,@date,@spots);", conn);
             cmd.Parameters.AddWithValue("@name", name);
             cmd.Parameters.AddWithValue("@activity", activity);
             cmd.Parameters.AddWithValue("@date", tripDate);

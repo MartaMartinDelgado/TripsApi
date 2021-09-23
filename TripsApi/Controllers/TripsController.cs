@@ -53,7 +53,7 @@ namespace TripsApi.Controllers
         // PUT: api/Trips/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutTrip(long id, Trip trip)
+        public async Task<IActionResult> PutTrip(int id, Trip trip)
         {
             if (id != trip.Id)
             {
@@ -99,7 +99,7 @@ namespace TripsApi.Controllers
 
         // DELETE: api/Trips/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteTrip(long id)
+        public async Task<IActionResult> DeleteTrip(int id)
         {
             var trip = await _context.Trips.FindAsync(id);
             if (trip == null)
