@@ -15,3 +15,7 @@ TripDate datetime NOT NULL,
 SpotsAvailable int NOT NULL,
 CONSTRAINT PK_Trip PRIMARY KEY(TripId)
 )
+
+SELECT * FROM  dbo.Trip WHERE TripId = 1;
+
+GO

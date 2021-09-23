@@ -28,7 +28,6 @@ namespace DLayer
         static SqlConnection conn;
         public static int init()
         {
-            //Create file input reader and create stream
             using (Stream fileStream = new FileStream(@"C:\Users\Marta\Desktop\Folders\Software Development\Advance Programming\CA\TripsApi\DLayer\.psw", FileMode.Open))
             {
                 StreamReader r = new StreamReader(fileStream);
@@ -43,9 +42,58 @@ namespace DLayer
             return 1;
         }
 
+        //Call init at the start of the app
         static int fake = init();
 
-        //Remember to call init at the start of the app
+        public static Trip getTrip(int id)
+        {
+            SqlDataReader reader;
+            Trip trip = null;
+
+            SqlCommand cmd = new SqlCommand("SELECT * FROM  dbo.Trip WHERE TripId = @TripId", conn);
+            cmd.Parameters.AddWithValue("@TripId", id);
+            try
+            {
+                conn.Open();
+                reader = cmd.ExecuteReader();
+                if (reader.Read())
+                {
+                    trip = new Trip(int.Parse(reader["TripId"].ToString()),reader["TripName"].ToString(), reader["Activity"].ToString(), (DateTime)reader["TripDate"], int.Parse(reader["SpotsAvailable"].ToString()));
+                }
+                
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return trip;
+        }
+
+        public static List<Trip> getAllTrips()
+        {
+            SqlDataReader reader;
+            Trip trip = null;
+            List<Trip> tripList = new List<Trip>();
+
+            SqlCommand cmd = new SqlCommand("SELECT * FROM  dbo.Trip", conn);
+            try
+            {
+                conn.Open();
+                reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    tripList.Add(new Trip(int.Parse(reader["TripId"].ToString()), reader["TripName"].ToString(), reader["Activity"].ToString(), (DateTime)reader["TripDate"], int.Parse(reader["SpotsAvailable"].ToString())));
+                }
+
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return tripList;
+        }
 
         public static int saveTrip(Trip t)
         {
@@ -85,7 +133,7 @@ namespace DLayer
             string activity = t.Activity;
             DateTime tripDate = t.TripDate;
             int spotsAvailable = t.SpotsAvailable;
-            SqlCommand cmd = new SqlCommand("EXEC ups_UpdateTrip" +
+            SqlCommand cmd = new SqlCommand("EXEC ups_UpdateTrip " +
                 "@TripId,@TripName,@Activity,@TripDate,@SpotsAvailable", conn);
             cmd.Parameters.AddWithValue("@TripId", id);
             cmd.Parameters.AddWithValue("@name", name);
@@ -107,7 +155,7 @@ namespace DLayer
 
         public static string deleteTrip(int id)
         {
-            SqlCommand cmd = new SqlCommand("EXEC ups_DeleteMembers" +
+            SqlCommand cmd = new SqlCommand("EXEC ups_DeleteMembers " +
                 "@TripId", conn);
             cmd.Parameters.AddWithValue("@TripId", id);
             try
