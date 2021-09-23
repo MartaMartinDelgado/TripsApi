@@ -58,30 +58,30 @@ namespace TripsApi.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutTrip(int id, Trip trip)
         {
-            if (id != trip.Id)
-            {
-                return BadRequest();
-            }
+            //if (id != trip.Id)
+            //{
+            //    return BadRequest();
+            //}
 
             BusinessLogic.updateTrip(trip);
 
-            //_context.Entry(trip).State = EntityState.Modified;
+            ////_context.Entry(trip).State = EntityState.Modified;
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!TripExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            //try
+            //{
+            //    await _context.SaveChangesAsync();
+            //}
+            //catch (DbUpdateConcurrencyException)
+            //{
+            //    if (!TripExists(id))
+            //    {
+            //        return NotFound();
+            //    }
+            //    else
+            //    {
+            //        throw;
+            //    }
+            //}
 
             return NoContent();
         }

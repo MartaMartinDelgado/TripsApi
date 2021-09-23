@@ -125,7 +125,7 @@ namespace DLayer
             return id;
         }
 
-        public static string updateTrip(Trip t)
+        public static void updateTrip(Trip t)
         {
             int id = t.Id;
             string name = t.Name;
@@ -135,10 +135,10 @@ namespace DLayer
             SqlCommand cmd = new SqlCommand("EXEC ups_UpdateTrip " +
                 "@TripId,@TripName,@Activity,@TripDate,@SpotsAvailable", conn);
             cmd.Parameters.AddWithValue("@TripId", id);
-            cmd.Parameters.AddWithValue("@name", name);
-            cmd.Parameters.AddWithValue("@activity", activity);
-            cmd.Parameters.AddWithValue("@date", tripDate);
-            cmd.Parameters.AddWithValue("@spots", spotsAvailable);
+            cmd.Parameters.AddWithValue("@TripName", name);
+            cmd.Parameters.AddWithValue("@Activity", activity);
+            cmd.Parameters.AddWithValue("@TripDate", tripDate);
+            cmd.Parameters.AddWithValue("@SpotsAvailable", spotsAvailable);
             try
             {
                 conn.Open();
@@ -148,13 +148,11 @@ namespace DLayer
             {
                 conn.Close();
             }
-
-            return "Updated trip ID: " + id;
         }
 
-        public static string deleteTrip(int id)
+        public static void deleteTrip(int id)
         {
-            SqlCommand cmd = new SqlCommand("EXEC ups_DeleteMembers " +
+            SqlCommand cmd = new SqlCommand("EXEC ups_DeleteTrip " +
                 "@TripId", conn);
             cmd.Parameters.AddWithValue("@TripId", id);
             try
@@ -166,8 +164,6 @@ namespace DLayer
             {
                 conn.Close();
             }
-
-            return "Removed trip ID: " + id;
         }
     }
 }
