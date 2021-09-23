@@ -7,7 +7,7 @@ namespace BLayer
     public class BusinessLogic
     {
         
-        public static void createTrip(Trip trip)
+        public static int createTrip(Trip trip)
         {
             if (string.IsNullOrWhiteSpace(trip.Name))
             {
@@ -27,7 +27,7 @@ namespace BLayer
             }
             else
             {
-                DBAccess.saveTrip(trip);
+                return DBAccess.saveTrip(trip);
             }
             
         }

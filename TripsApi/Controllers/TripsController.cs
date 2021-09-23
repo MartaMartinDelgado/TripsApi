@@ -88,13 +88,18 @@ namespace TripsApi.Controllers
         [HttpPost]
         public async Task<ActionResult<Trip>> PostTrip(Trip trip)
         {
-            BusinessLogic.createTrip(trip);
+            int tId = BusinessLogic.createTrip(trip);
+
+            trip.Id = tId;
 
             //_context.Trips.Add(trip);
-            await _context.SaveChangesAsync();
+            //await _context.SaveChangesAsync();
 
             //return CreatedAtAction("GetTrip", new { id = trip.TripId }, trip);
-            return CreatedAtAction(nameof(GetTrip), new { id = trip.Id }, trip);
+            //return CreatedAtAction(nameof(GetTrip), new { id = trip.Id }, trip);
+
+            //Replace this by the Get controller
+            return trip;
         }
 
         // DELETE: api/Trips/5
