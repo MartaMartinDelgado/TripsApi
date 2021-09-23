@@ -20,7 +20,7 @@ namespace DLayer
         static string cs = ConfigurationManager.ConnectionStrings["tripsConnector"].ConnectionString;
         static SqlConnection conn = new SqlConnection(cs);
 
-        public static int saveTrip(Trip t)
+        public static string saveTrip(Trip t)
         {
             int id = t.Id;
             string name = t.Name;
@@ -48,7 +48,52 @@ namespace DLayer
                 conn.Close();
             }
 
-            return id;
+            return "Added trip ID: " + id;
+        }
+
+        public static string updateTrip(Trip t)
+        {
+            int id = t.Id;
+            string name = t.Name;
+            string activity = t.Activity;
+            DateTime tripDate = t.TripDate;
+            int spotsAvailable = t.SpotsAvailable;
+            SqlCommand cmd = new SqlCommand("EXEC ups_UpdateTrip" +
+                "@TripId,@TripName,@Activity,@TripDate,@SpotsAvailable", conn);
+            cmd.Parameters.AddWithValue("@TripId", id);
+            cmd.Parameters.AddWithValue("@name", name);
+            cmd.Parameters.AddWithValue("@activity", activity);
+            cmd.Parameters.AddWithValue("@date", tripDate);
+            cmd.Parameters.AddWithValue("@spots", spotsAvailable);
+            try
+            {
+                conn.Open();
+                cmd.ExecuteNonQuery();
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return "Updated trip ID: " + id;
+        }
+
+        public static string deleteTrip(int id)
+        {
+            SqlCommand cmd = new SqlCommand("EXEC ups_DeleteMembers" +
+                "@TripId", conn);
+            cmd.Parameters.AddWithValue("@TripId", id);
+            try
+            {
+                conn.Open();
+                cmd.ExecuteNonQuery();
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return "Removed trip ID: " + id;
         }
     }
 }

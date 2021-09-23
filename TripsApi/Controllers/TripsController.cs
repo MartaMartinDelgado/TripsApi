@@ -60,7 +60,9 @@ namespace TripsApi.Controllers
                 return BadRequest();
             }
 
-            _context.Entry(trip).State = EntityState.Modified;
+            BusinessLogic.updateTrip(trip);
+
+            //_context.Entry(trip).State = EntityState.Modified;
 
             try
             {
@@ -88,7 +90,7 @@ namespace TripsApi.Controllers
         {
             BusinessLogic.createTrip(trip);
 
-            _context.Trips.Add(trip);
+            //_context.Trips.Add(trip);
             await _context.SaveChangesAsync();
 
             //return CreatedAtAction("GetTrip", new { id = trip.TripId }, trip);
@@ -105,7 +107,9 @@ namespace TripsApi.Controllers
                 return NotFound();
             }
 
-            _context.Trips.Remove(trip);
+            BusinessLogic.removeTrip(id);
+
+            //_context.Trips.Remove(trip);
             await _context.SaveChangesAsync();
 
             return NoContent();
