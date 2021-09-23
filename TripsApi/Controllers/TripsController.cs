@@ -33,19 +33,22 @@ namespace TripsApi.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Trip>>> GetTrips()
         {
-            return await _context.Trips.ToListAsync();
+            List<Trip> trips = BusinessLogic.selectAllTrips();
+            //return await _context.Trips.ToListAsync();
+            return trips;
         }
 
         // GET: api/Trips/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Trip>> GetTrip(long id)
+        public async Task<ActionResult<Trip>> GetTrip(int id)
         {
-            var trip = await _context.Trips.FindAsync(id);
+            Trip trip = BusinessLogic.selectTrip(id);
+            //var trip = await _context.Trips.FindAsync(id);
 
-            if (trip == null)
-            {
-                return NotFound();
-            }
+            //if (trip == null)
+            //{
+            //    return NotFound();
+            //}
 
             return trip;
         }
@@ -98,7 +101,6 @@ namespace TripsApi.Controllers
             //return CreatedAtAction("GetTrip", new { id = trip.TripId }, trip);
             //return CreatedAtAction(nameof(GetTrip), new { id = trip.Id }, trip);
 
-            //Replace this by the Get controller
             return trip;
         }
 
@@ -106,16 +108,17 @@ namespace TripsApi.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteTrip(int id)
         {
-            var trip = await _context.Trips.FindAsync(id);
-            if (trip == null)
-            {
-                return NotFound();
-            }
-
             BusinessLogic.removeTrip(id);
+            //var trip = await _context.Trips.FindAsync(id);
+            //if (trip == null)
+            //{
+            //    return NotFound();
+            //}
 
-            //_context.Trips.Remove(trip);
-            await _context.SaveChangesAsync();
+            //BusinessLogic.removeTrip(id);
+
+            ////_context.Trips.Remove(trip);
+            //await _context.SaveChangesAsync();
 
             return NoContent();
         }

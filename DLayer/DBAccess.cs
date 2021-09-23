@@ -73,7 +73,6 @@ namespace DLayer
         public static List<Trip> getAllTrips()
         {
             SqlDataReader reader;
-            Trip trip = null;
             List<Trip> tripList = new List<Trip>();
 
             SqlCommand cmd = new SqlCommand("SELECT * FROM  dbo.Trip", conn);
