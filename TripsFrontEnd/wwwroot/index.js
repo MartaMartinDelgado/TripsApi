@@ -48,7 +48,8 @@ function tripCreate() {
     const spotsAvailable = document.getElementById("spotsAvailable").value;
 
     const xhttp = new XMLHttpRequest();
-    xhttp.open("POST", "https://localhost:44328/api/trips/create");
+    xhttp.open("POST", "https://localhost:44328/api/trips/trip");
+    xhttp.setRequestHeader("Access-Control-Allow-Origin", "*");
     xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     xhttp.send(JSON.stringify({
         "name": name, "activity": activity, "tripDate": tripDate, "spotsAvailable": spotsAvailable
