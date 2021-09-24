@@ -83,9 +83,17 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BLayer\BLayer.csproj">
+      <Project>{bddabfa0-c046-4598-b1a2-bea67b0cde5b}</Project>
+      <Name>BLayer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Models\Models.csproj">
       <Project>{d54d7021-5811-40f1-909b-4208cb3e4d06}</Project>
       <Name>Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TripsApi\TripsApi.csproj">
+      <Project>{1c3d12fe-e4fb-4ebd-8fea-68b006a99473}</Project>
+      <Name>TripsApi</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
