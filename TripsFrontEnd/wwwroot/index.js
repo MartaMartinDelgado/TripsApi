@@ -14,8 +14,8 @@
                 trHTML += '<td>' + object['activity'] + '</td>';
                 trHTML += '<td>' + object['tripDate'] + '</td>';
                 trHTML += '<td>' + object['spotsAvailable'] + '</td>';
-                trHTML += '<td><button type="button" class="btn btn-outline-secondary" onclick="showTripEditBox(' + object['id'] + ')">Edit</button></td>';
-                trHTML += '<td><button type="button" class="btn btn-outline-danger" onclick="tripDelete(' + object['id'] + ')">Delete</button></td>';
+                trHTML += '<td><button type="button" class="btn btn-outline-secondary" onclick="showTripEditBox(' + object['id'] + ')">Edit</button>';
+                trHTML += '<button type="button" class="btn btn-outline-danger" onclick="tripDelete(' + object['id'] + ')">Delete</button></td>';
                 trHTML += '</tr>';//"</tr>";
             }
             document.getElementById("mytable").innerHTML = trHTML;
